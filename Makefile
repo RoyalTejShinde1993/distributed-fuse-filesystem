@@ -1,6 +1,5 @@
-
 CXX=g++
-CXXFLAGS=-std=c++17 -Wall -pthread
+CXXFLAGS=-std=c++17 -Wall -pthread -Iinclude
 
 SRC=$(wildcard src/*.cpp)
 OUT=myfs

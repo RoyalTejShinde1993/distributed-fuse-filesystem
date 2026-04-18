@@ -1,4 +1,4 @@
 
 #pragma once
-#include <fuse.h>
+#include <fuse3/fuse.h>
 extern struct fuse_operations fs_oper;

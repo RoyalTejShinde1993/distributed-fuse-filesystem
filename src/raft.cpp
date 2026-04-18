@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "raft.h"
 #include "rpc.h"
 RaftNode raft;

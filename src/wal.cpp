@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "wal.h"
 #include <fstream>
 WAL wal;

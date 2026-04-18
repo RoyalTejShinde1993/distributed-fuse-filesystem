@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "cache.h"
 #include <fstream>
 PageCache cache;

@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # 🚀 Distributed FUSE Filesystem  
 ### ⚡ High-Performance Distributed Storage System (C++ | Raft | WAL | LSM | FUSE)
 

@@ -1,0 +1,7 @@
+
+myfs
+*.o
+data/*
+logs/*
+*.csv
+*.png

@@ -7,7 +7,7 @@
 #include "lsm.h"
 #include <cstring>
 
-static int fs_getattr(const char *path, struct stat *st){
+static int fs_getattr(const char *path, struct stat *st, struct fuse_file_info *fi){
     memset(st,0,sizeof(struct stat));
     if(strcmp(path,"/")==0){ st->st_mode=S_IFDIR|0755; return 0;}
     auto m=metadata.get(path);
@@ -42,9 +42,11 @@ static int fs_read(const char *path,char *buf,size_t size,off_t,struct fuse_file
     return std::min(size,d.size());
 }
 
-struct fuse_operations fs_oper={
-    .getattr=fs_getattr,
-    .create=fs_create,
-    .write=fs_write,
-    .read=fs_read
-};
+struct fuse_operations fs_oper = {};
+
+void init_fs_oper() {
+    fs_oper.getattr = fs_getattr;
+    fs_oper.create  = fs_create;
+    fs_oper.write   = fs_write;
+    fs_oper.read    = fs_read;
+}

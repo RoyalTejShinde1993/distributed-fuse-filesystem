@@ -24,7 +24,7 @@ void PageCache::flush(){
     for(auto &it:cache){
         if(it.second.dirty){
             std::cout << "[CACHE FLUSH] " << it.first << std::endl;
-            std::ofstream("data"+it.first)<<it.second.data;
+            std::ofstream("data/" + it.first.substr(1)) << it.second.data;
             it.second.dirty=false;
         }
     }

@@ -21,6 +21,65 @@ Designed for:
 ## 🏗️ Architecture
 Client → FUSE → PageCache → WAL → Raft Leader → Followers → Disk
 
+## Architecture
+
+```text
+                     +----------------------+
+                     |       Client         |
+                     |  POSIX File Access   |
+                     +----------+-----------+
+                                |
+                                v
+                     +----------------------+
+                     |      FUSE Layer      |
+                     |  Userspace Filesystem|
+                     +----------+-----------+
+                                |
+            +-------------------+-------------------+
+            |                                       |
+            v                                       v
++----------------------+               +----------------------+
+|   Metadata Manager   |               |  Replication Engine  |
++----------+-----------+               +----------+-----------+
+           |                                      |
+           |                                      |
+           v                                      v
++----------------------+               +----------------------+
+|    Storage Node A    |<------------->|    Storage Node B    |
+|  Chunk Storage       |   Replication |  Chunk Storage       |
++----------------------+               +----------------------+
+           ^
+           |
+           |
++----------------------+
+|   Storage Node C    |
+|  Chunk Storage       |
++----------------------+
+```
+## Replication Workflow
+```text
+Client Write Request
+        |
+        v
++----------------------+
+|   Metadata Manager   |
++----------+-----------+
+           |
+           | Select Replicas
+           v
++----------------------+       +----------------------+
+|    Storage Node A    | ----> |    Storage Node B    |
++----------------------+       +----------------------+
+           |
+           |
+           v
++----------------------+
+|    Storage Node C    |
++----------------------+
+
+Replication Factor = 3
+```
+
 ---
 
 ## ✨ Features
